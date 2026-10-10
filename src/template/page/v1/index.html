@@ -43,17 +43,24 @@
             <label for="age" class="form-label">Age</label>
             <select id="age" class="form-select" aria-label="Age select">
                 <option selected>All</option>
-                <option value="2">< 18</option>
-                <option value="3">>= 18</option>
+                <option value="2">&lt; 18</option>
+                <option value="3">&gt;= 18</option>
             </select>
         </div>
         <button class="col mx-2 btn btn-primary">Set</button>
     </form>
     <div class="row g-3 mt-5">
-        <div class="col-md-6 border">
-            <div class="">Chart.js Doughnut Chart => Gender: Male, Female, None</div>
+        <div class="col-md-6">
+            <!-- <div class="">Chart.js Doughnut Chart => Gender: Male, Female, None</div> -->
+            <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
+            <div style="position: relative; width: 100%; max-width: 800px;">
+                <canvas id="myChart"></canvas>
+            </div>
+            <!-- <script type="module" src="dimensions.js"></script> -->
+            <!-- <script type="module" src="acquisitions.js"></script> -->
+            
         </div>
-        <div class="col-md-6 border">
+        <div class="col-md-6">
             <div class="">Chart.js Bar Chart => Age: <18 and >=18</div>
         </div>
     </div>
@@ -61,4 +68,59 @@
 {% endblock %} 
 
 {% block js %}
+<script>
+
+ // 3. Ambil konteks canvas dan buat grafik
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar', // Tipe grafik: bar, line, pie, dll.
+      data: {
+        labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei'],
+        datasets: [{
+          label: 'Penjualan Produk',
+          data: [12, 19, 3, 5, 2],
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    
+    // import Chart from 'chart.js/auto'
+
+    // (async function() {
+    // const data = [
+    //     { year: 2010, count: 10 },
+    //     { year: 2011, count: 20 },
+    //     { year: 2012, count: 15 },
+    //     { year: 2013, count: 25 },
+    //     { year: 2014, count: 22 },
+    //     { year: 2015, count: 30 },
+    //     { year: 2016, count: 28 },
+    // ];
+
+    // new Chart(
+    //     document.getElementById('acquisitions'),
+    //     {
+    //     type: 'bar',
+    //     data: {
+    //         labels: data.map(row => row.year),
+    //         datasets: [
+    //         {
+    //             label: 'Acquisitions by year',
+    //             data: data.map(row => row.count)
+    //         }
+    //         ]
+    //     }
+    //     }
+    // );
+    // })();
+</script>
 {% endblock %}
